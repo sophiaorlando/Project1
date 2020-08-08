@@ -67,20 +67,52 @@
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2020-09-01?inboundpartialdate=2020-12-01",
-            // "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/US/USD/en-US/SFO-sky/LAX-sky/2020-09-01?inboundpartialdate=2020-12-01",
+            //  "url": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/SFO-sky/JFK-sky/2020-09-01?inboundpartialdate=2020-12-01",
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
                 "x-rapidapi-key": "116c1285c3msh056dc0c721a2d65p1c9b46jsn5cc93fcf009b"
             }
         }
+        var originPlace = ""
+        originPlace = "JFK-sky"
 
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-        });
-        // hello world
-   
+        settings.url = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/" + originPlace + "/SFO-sky/2020-09-01?inboundpartialdate=2020-12-01"
+
+
+
+        function runThePage() {
+            $.ajax(settings).done(function (response) {
+                // console.log(originPlace);
+                // console.log(settings.url)
+                // // console.log(response.Places)
+                originCity(response)
+
+            });
+        }
+
+
+        function originCity(response) {
+            $(".button").on('click', function(event){
+                event.preventDefault()
+                var originResult = response.Places
+            for (var index = 0; index < originResult.length; index++) {
+                var originInput = $("#origin")
+                originInput = originResult[index].CityName
+                console.log(originInput)
+                
+            }
+            })
+        }
+
+
+
+        runThePage()
+
+
+
+
+
 
 
 
