@@ -40,7 +40,7 @@
         <!--ONE WAY/ROUND TRIP-->
         <label>Trip Details
             <select id="tripDetails" class="inputBox">
-                <option value="oneWay" id="oneWay" >One Way</option>
+                <option value="oneWay" id="oneWay">One Way</option>
                 <option value="roundTrip" id="roundTrip">Round Trip</option>
             </select>
         </label>
@@ -101,47 +101,31 @@
                 originCity(response)
             });
         }
-        var infoDiv = $("<div>")
 
 
         function originCity(response) {
             $(".button").on('click', function (event) {
                 event.preventDefault()
-                var originResult = response.Places
-                for (var index = 0; index < originResult.length; index++) {
-                    originInput = originResult[index].CityName
-                    // var infoDiv = $("<div>")
+                var originResult = response
+                for (var index = 0; index < originResult.Places.length; index++) {
+                    originInput = originResult.Places[index].CityName
+                    var infoDiv = $("<div>")
                     var cityP = $("<p>").text("City: " + originInput)
-                    airport = originResult[index].Name
+                    airport = originResult.Places[index].Name
                     var airportP = $("<p>").text("Airport: " + airport)
                     infoDiv.append(cityP)
                     infoDiv.prepend(airport)
                     $("#info-appears-here").append(infoDiv)
-                    // console.log(response.Quotes[1].MinPrice)
+                    // console.log(originResult)
                 }
             })
         }
 
-        function originCity(response) {
-            $(".button").on('click', function (event) {
-                event.preventDefault()
-                var priceResult = response.Quotes
-                for (var index = 0; index < priceResult.length; index++) {
-                    priceInput = priceResult[index].MinPrice
-                    var priceP = $("<p>").text(priceInput)
-                    infoDiv.append(cityP)
-                    infoDiv.prepend(airport)
-                    infoDiv.prepend(priceInput)
-                    $("#info-appears-here").append(infoDiv)
-                    // console.log(response.Quotes[1].MinPrice)
-                }
-            })
-        }
-
-    
 
 
-        
+
+
+
 
 
 
