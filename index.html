@@ -89,7 +89,7 @@
             }
         }
         var originPlace = ""
-        originPlace = "JFK-sky"
+        originPlace = "PARI-sky"
 
         settings.url = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/" + originPlace + "/SFO-sky/2020-09-01?inboundpartialdate=2020-12-01"
 
@@ -97,11 +97,7 @@
 
         function runThePage() {
             $.ajax(settings).done(function (response) {
-                // console.log(originPlace);
-                // console.log(settings.url)
-                // // console.log(response.Places)
                 originCity(response)
-
             });
         }
 
