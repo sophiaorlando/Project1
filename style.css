@@ -35,10 +35,28 @@ label{
     font-weight:bolder;
     font-size: 15px;
     letter-spacing: 2px;
+    text-align: center;
 }
 
 .inputBox{
     border-radius: 10px;
+    text-emphasis: center;
+    border-color: blue;
+}
+
+form{
+    /* display: flex; */
+  /* justify-content: center; */
+  margin-left:180px;
+}
+
+#slogan{
+    color:darkslategrey;
+    font-weight:bolder;
+    font-size: 25px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-left:10px;
 }
 
 #tripDetails{
