@@ -19,18 +19,25 @@
 
     <div class="callout">
 
-        <!--ORIGIN & DESTINATION CITY-->
+        <!--IP ADDRESS & DESTINATION CITY-->
         <form>
             <div class="grid-container">
                 <div class="grid-x grid-padding-x">
                     <label id="slogan">
-                        Search cities to find out the COVID-19 safest airports to fly into!
+                        Search cities to find out the
+                        <br>COVID-19 safest airports to fly into!
                     </label>
                     <div class="medium-10 cell">
-                        <label id="label-destination">Destination
+                        <label class="infoField">Destination
                             <input type="text" placeholder="City" id="air-destination" class="inputBox">
                         </label>
                     </div>
+                    <div class="medium-10 cell">
+                        <label class="infoField">IP Address of Destination
+                            <input type="text" placeholder="ex: 185.47.81.52" id="ip-address" class="inputBox">
+                        </label>
+                    </div>
+
                 </div>
             </div>
         </form>
@@ -54,28 +61,61 @@
         $(document).ready(function () {
 
             var destInput = ""
-            destInput = "Chicago"
-            
 
 
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destInput +  "",
+                "url": "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destInput + "",
                 "method": "GET",
                 "headers": {
                     "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
                     "x-rapidapi-key": "116c1285c3msh056dc0c721a2d65p1c9b46jsn5cc93fcf009b"
                 }
             }
+
+
+
             function runThePage() {
+                destInput = document.getElementById('air-destination').value
+                settings.url = " https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destInput + ""
                 $.ajax(settings).done(function (response) {
                     destinationCity(response)
-                    // console.log(response);
-                    // console.log($("#air-destination").val())
-
+                    console.log(response)
                 });
             }
+
+
+            function numbersIP() {
+                var ip = $("#ip-address").val().trim()
+                var access_key = "de038bb2c655ab1fae8f92d8575ee2b3"
+
+                // get the API result via jQuery.ajax
+                $.ajax({
+                    url: 'http://api.ipstack.com/' + ip + '?access_key=' + access_key,
+                    dataType: 'jsonp',
+                    success: function (json) {
+
+                        // output the "capital" object inside "location"
+                        console.log(json.location.country_flag_emoji);
+                        console.log(json)
+                        console.log(json.location.languages[0].name)
+                        var flagEmoj = json.location.country_flag_emoji
+                        var language = json.location.languages[0].name
+                        var infoDiv = $("<div>").addClass("displayInfo")
+                        var address = $("<p>").text("Country Flag: " + flagEmoj)
+                        var dispLanguage = $("<p>").text("Language: " + language)
+                        infoDiv.append(address)
+                        infoDiv.append(dispLanguage)
+                        $("#info-appears-here").append(infoDiv)
+
+                    }
+
+                });
+
+
+            }
+
 
             function destinationCity(response) {
                 for (var index = 0; index < response.Places.length; index++) {
@@ -85,12 +125,18 @@
                     var destination = $("<p>").text("Airport: " + airportInput + ", " + countryInput)
                     infoDiv.append(destination)
                     $("#info-appears-here").append(infoDiv)
+                    console.log(response)
                 }
             }
 
 
-        $(".button").on('click', runThePage)
-         
+            $(".button").on('click', function (event) {
+                event.preventDefault()
+                runThePage()
+                numbersIP()
+
+            })
+
         })
 
 
