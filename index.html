@@ -24,8 +24,7 @@
             <div class="grid-container">
                 <div class="grid-x grid-padding-x">
                     <label id="slogan">
-                        Search cities to find out the
-                        COVID-19 safest airports to fly into!
+                        Search cities to find airports & current COVID-19 stats!
                     </label>
                     <div class="medium-10 cell">
                         <label class="infoField">Destination
@@ -53,9 +52,8 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-
+    // Skyscanner API
         $(document).ready(function () {
-
             var destInput = ""
 
 
@@ -69,7 +67,7 @@
                     "x-rapidapi-key": "116c1285c3msh056dc0c721a2d65p1c9b46jsn5cc93fcf009b"
                 }
             }
-
+    // Running destinationInput & manipulating Skyscanner API URL
             function runThePage() {
                 destInput = document.getElementById('air-destination').value
                 settings.url = " https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destInput + ""
@@ -77,7 +75,7 @@
                     destinationCity(response)
                 });
             }
-
+    // COVID API
             function covidInfo(country) {
                 var settings2 = {
                     "async": true,
@@ -89,7 +87,7 @@
                         "x-rapidapi-key": "116c1285c3msh056dc0c721a2d65p1c9b46jsn5cc93fcf009b"
                     }
                 }
-
+    // Appending COVID Data
                 $.ajax(settings2).done(function (response) {
                     var deaths = response.data.deaths
                     var deathCase = $("<p>").text("Number of deaths in country: " + deaths)
@@ -104,8 +102,7 @@
                     console.log(response.data)
                 });
             }
-
-
+    // Appending Airport Data
             function destinationCity(response) {
                 for (var index = 0; index < response.Places.length; index++) {
                     airportInput = response.Places[index].PlaceName
@@ -122,7 +119,7 @@
 
             }
 
-
+    // Displays page info on button click
             $(".button").on('click', function (event) {
                 event.preventDefault()
                 runThePage()
