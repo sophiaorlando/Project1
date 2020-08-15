@@ -32,11 +32,6 @@
                             <input type="text" placeholder="City" id="air-destination" class="inputBox">
                         </label>
                     </div>
-                    <div class="medium-10 cell">
-                        <label class="infoField">IP Address of Destination for COVID-19 Data
-                            <input type="text" placeholder="ex: 185.47.81.52" id="ip-address" class="inputBox">
-                        </label>
-                    </div>
 
                 </div>
             </div>
@@ -88,7 +83,6 @@
                 settings.url = " https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destInput + ""
                 $.ajax(settings).done(function (response) {
                     destinationCity(response)
-                    // console.log(response)
                 });
             }
 
@@ -111,47 +105,13 @@
                     var recovCase = $("<p>").text("Number of recovered cases in country: " + recovered)
                     var cases = response.data.confirmed
                     var confirmCase = $("<p>").text("Number of confirmed cases in country: " + cases)
-                    var infoDiv = $(".extraInfo")
+                    var infoDiv = $(".extraInfo").addClass(".displayInfo")
                     infoDiv.append(confirmCase)
                     infoDiv.append(recovCase)
                     infoDiv.append(deathCase)
                     console.log(response.data)
                 });
             }
-
-
-
-
-            // function numbersIP() {
-            //     var ip = $("#ip-address").val().trim()
-            //     var access_key = "de038bb2c655ab1fae8f92d8575ee2b3"
-
-            //     // get the API result via jQuery.ajax
-            //     $.ajax({
-            //         url: 'http://api.ipstack.com/' + ip + '?access_key=' + access_key,
-            //         dataType: 'jsonp',
-            //         success: function (json) {
-
-            //             // output the "capital" object inside "location"
-            //             var flagEmoj = json.location.country_flag_emoji
-            //             var language = json.location.languages[0].name
-            //             var infoDiv = $("<div>").addClass("displayInfo extraInfo")
-            //             var address = $("<p>").text("Country Flag: " + flagEmoj)
-            //             var dispLanguage = $("<p>").text("Language: " + language)
-            //             infoDiv.append(address)
-            //             infoDiv.append(dispLanguage)
-            //             $("#info-appears-here").append(infoDiv)
-            //             // console.log(json.country_name)
-            //             // covidInfo(json.country_name)
-            //             getIp(json.ip)
-            //             // console.log(json.ip)
-
-            //         }
-
-            //     });
-
-
-            // }
 
 
             function destinationCity(response) {
@@ -163,10 +123,6 @@
                     infoDiv.append(destination)
                     $("#info-appears-here").append(infoDiv)
                     console.log(response)
-                    // covidInfo(response.Places[0].CountryName)
-
-
-                    // console.log(response)
                 }
                 covidInfo(response.Places[0].CountryName)
 
@@ -176,8 +132,6 @@
             $(".button").on('click', function (event) {
                 event.preventDefault()
                 runThePage()
-                // numbersIP()
-                // getIp()
 
 
             })
