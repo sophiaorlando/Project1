@@ -49,6 +49,8 @@ h1{
     font-weight:bolder;
     font-size: 25px;
     letter-spacing: 2px;
+    margin-left:auto;
+    margin-right:auto;
     text-align: center;
 }
 
