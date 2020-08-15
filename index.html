@@ -81,9 +81,37 @@
                 settings.url = " https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destInput + ""
                 $.ajax(settings).done(function (response) {
                     destinationCity(response)
-                    console.log(response)
+                    // console.log(response)
                 });
             }
+
+            function covidInfo(country){
+                var settings2 = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=" + country + "",
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
+                    "x-rapidapi-key": "116c1285c3msh056dc0c721a2d65p1c9b46jsn5cc93fcf009b"
+                }
+            }
+
+            $.ajax(settings2).done(function (response) {
+                var deaths = response.data.deaths
+                var deathCase = $("<p>").text("Number of deaths in country: " + deaths)
+                var recovered = response.data.recovered
+                var recovCase = $("<p>").text("Number of recovered cases in country: " + recovered)
+                var cases = response.data.confirmed
+                var confirmCase = $("<p>").text("Number of confirmed cases in country: " + cases)
+                var infoDiv = $(".extraInfo")
+                infoDiv.append(confirmCase)
+                infoDiv.append(recovCase)
+                infoDiv.append(deathCase)                
+            });
+            }
+         
+
 
 
             function numbersIP() {
@@ -97,17 +125,16 @@
                     success: function (json) {
 
                         // output the "capital" object inside "location"
-                        console.log(json.location.country_flag_emoji);
-                        console.log(json)
-                        console.log(json.location.languages[0].name)
                         var flagEmoj = json.location.country_flag_emoji
                         var language = json.location.languages[0].name
-                        var infoDiv = $("<div>").addClass("displayInfo")
+                        var infoDiv = $("<div>").addClass("displayInfo extraInfo")
                         var address = $("<p>").text("Country Flag: " + flagEmoj)
                         var dispLanguage = $("<p>").text("Language: " + language)
                         infoDiv.append(address)
                         infoDiv.append(dispLanguage)
                         $("#info-appears-here").append(infoDiv)
+                        // console.log(json.country_name)
+                        covidInfo(json.country_name)
 
                     }
 
@@ -125,7 +152,7 @@
                     var destination = $("<p>").text("Airport: " + airportInput + ", " + countryInput)
                     infoDiv.append(destination)
                     $("#info-appears-here").append(infoDiv)
-                    console.log(response)
+                    // console.log(response)
                 }
             }
 
@@ -134,6 +161,7 @@
                 event.preventDefault()
                 runThePage()
                 numbersIP()
+                
 
             })
 
