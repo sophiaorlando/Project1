@@ -112,3 +112,27 @@ form {
 
 }
 
+.displayCovid{
+    border-style:solid;
+    border-radius: 10px;
+    border-color: #efc050;
+    padding:10px 10px 10px 20px;
+    margin:10px;
+    letter-spacing: 2px;
+    color:darkslategrey;
+    font-weight:bolder;
+
+}
+    
+
+
+
+.displayCovid:hover{
+    background-color:whitesmoke;
+    color:blue;
+    box-shadow: 5px 10px;
+    font-weight:bolder;
+
+}
+
+

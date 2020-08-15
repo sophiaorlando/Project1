@@ -70,14 +70,6 @@
                 }
             }
 
-            function getIp(ipaddress) {
-
-                $.getJSON('https://ipapi.co/' + ipaddress + '/json/', function (data) {
-                    console.log(data)
-                })
-            }
-
-
             function runThePage() {
                 destInput = document.getElementById('air-destination').value
                 settings.url = " https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + destInput + ""
@@ -105,10 +97,10 @@
                     var recovCase = $("<p>").text("Number of recovered cases in country: " + recovered)
                     var cases = response.data.confirmed
                     var confirmCase = $("<p>").text("Number of confirmed cases in country: " + cases)
-                    var infoDiv = $(".extraInfo").addClass(".displayInfo")
-                    infoDiv.append(confirmCase)
-                    infoDiv.append(recovCase)
-                    infoDiv.append(deathCase)
+                    var dispCovid = $(".displayCovid")
+                    dispCovid.append(confirmCase)
+                    dispCovid.append(recovCase)
+                    dispCovid.append(deathCase)
                     console.log(response.data)
                 });
             }
@@ -118,12 +110,14 @@
                 for (var index = 0; index < response.Places.length; index++) {
                     airportInput = response.Places[index].PlaceName
                     countryInput = response.Places[index].CountryName
-                    var infoDiv = $("<div>").addClass("displayInfo extraInfo")
+                    var infoDiv = $("<div>").addClass("displayInfo")
+                    var covidDiv = $("<div>").addClass("displayCovid")
                     var destination = $("<p>").text("Airport: " + airportInput + ", " + countryInput)
                     infoDiv.append(destination)
                     $("#info-appears-here").append(infoDiv)
                     console.log(response)
                 }
+                $("#info-appears-here").prepend(covidDiv)
                 covidInfo(response.Places[0].CountryName)
 
             }
