@@ -75,19 +75,12 @@
                 }
             }
 
-            // var ipaddress = ""
-
-
             function getIp(ipaddress) {
 
                 $.getJSON('https://ipapi.co/' + ipaddress + '/json/', function (data) {
                     console.log(data)
                 })
             }
-
-
-
-
 
 
             function runThePage() {
@@ -129,58 +122,62 @@
 
 
 
-            function numbersIP() {
-                var ip = $("#ip-address").val().trim()
-                var access_key = "de038bb2c655ab1fae8f92d8575ee2b3"
+            // function numbersIP() {
+            //     var ip = $("#ip-address").val().trim()
+            //     var access_key = "de038bb2c655ab1fae8f92d8575ee2b3"
 
-                // get the API result via jQuery.ajax
-                $.ajax({
-                    url: 'http://api.ipstack.com/' + ip + '?access_key=' + access_key,
-                    dataType: 'jsonp',
-                    success: function (json) {
+            //     // get the API result via jQuery.ajax
+            //     $.ajax({
+            //         url: 'http://api.ipstack.com/' + ip + '?access_key=' + access_key,
+            //         dataType: 'jsonp',
+            //         success: function (json) {
 
-                        // output the "capital" object inside "location"
-                        var flagEmoj = json.location.country_flag_emoji
-                        var language = json.location.languages[0].name
-                        var infoDiv = $("<div>").addClass("displayInfo extraInfo")
-                        var address = $("<p>").text("Country Flag: " + flagEmoj)
-                        var dispLanguage = $("<p>").text("Language: " + language)
-                        infoDiv.append(address)
-                        infoDiv.append(dispLanguage)
-                        $("#info-appears-here").append(infoDiv)
-                        // console.log(json.country_name)
-                        covidInfo(json.country_name)
-                        getIp(json.ip)
-                        // console.log(json.ip)
+            //             // output the "capital" object inside "location"
+            //             var flagEmoj = json.location.country_flag_emoji
+            //             var language = json.location.languages[0].name
+            //             var infoDiv = $("<div>").addClass("displayInfo extraInfo")
+            //             var address = $("<p>").text("Country Flag: " + flagEmoj)
+            //             var dispLanguage = $("<p>").text("Language: " + language)
+            //             infoDiv.append(address)
+            //             infoDiv.append(dispLanguage)
+            //             $("#info-appears-here").append(infoDiv)
+            //             // console.log(json.country_name)
+            //             // covidInfo(json.country_name)
+            //             getIp(json.ip)
+            //             // console.log(json.ip)
 
-                    }
+            //         }
 
-                });
+            //     });
 
 
-            }
+            // }
 
 
             function destinationCity(response) {
                 for (var index = 0; index < response.Places.length; index++) {
                     airportInput = response.Places[index].PlaceName
                     countryInput = response.Places[index].CountryName
-                    var infoDiv = $("<div>").addClass("displayInfo")
+                    var infoDiv = $("<div>").addClass("displayInfo extraInfo")
                     var destination = $("<p>").text("Airport: " + airportInput + ", " + countryInput)
                     infoDiv.append(destination)
                     $("#info-appears-here").append(infoDiv)
                     console.log(response)
+                    // covidInfo(response.Places[0].CountryName)
+
 
                     // console.log(response)
                 }
+                covidInfo(response.Places[0].CountryName)
+
             }
 
 
             $(".button").on('click', function (event) {
                 event.preventDefault()
                 runThePage()
-                numbersIP()
-                getIp()
+                // numbersIP()
+                // getIp()
 
 
             })
