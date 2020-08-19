@@ -99,7 +99,7 @@
                     dispCovid.append(confirmCase)
                     dispCovid.append(recovCase)
                     dispCovid.append(deathCase)
-                    console.log(response.data)
+                    console.log("Welcome to our application!")
                 });
             }
     // Appending Airport Data
@@ -112,7 +112,6 @@
                     var destination = $("<p>").text("Airport: " + airportInput + ", " + countryInput)
                     infoDiv.append(destination)
                     $("#info-appears-here").append(infoDiv)
-                    console.log(response)
                 }
                 $("#info-appears-here").prepend(covidDiv)
                 covidInfo(response.Places[0].CountryName)

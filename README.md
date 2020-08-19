@@ -2,7 +2,7 @@
 
 ## What is it?
 
-Fly High is a site that allows users to safely plan trips by submitting their destination and receiving relevant airports, current COVID-19 statistics for their destination, and useful information about their destination country.
+Fly High is a site that allows users to safely plan trips by submitting their destination city and receiving relevant airports and current COVID-19 statistics for their destination.
 
 ### Languages Used:
 * HTML
@@ -10,6 +10,9 @@ Fly High is a site that allows users to safely plan trips by submitting their de
 * JavaScript
 * jQuery
 * Ajax
+
+### Additional Technology:
+* Foundation CSS
 
 ### Directions:
 1. Enter city name
