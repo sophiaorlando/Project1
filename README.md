@@ -11,11 +11,19 @@ Fly High is a site that allows users to safely plan trips by submitting their de
 * jQuery
 * Ajax
 
+### Directions:
+1. Enter city name
+2. Press button
+3. COVID statistics will populate followed by airport locations
+4. Refresh the page to search for a new destination
+
+
+
 ### APIs Used:
 * Skyscanner Flight Search (https://rapidapi.com/skyscanner/api/skyscanner-flight-search)
 * COVID-19 Statistics (https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics)
 
 ### Site Layout:
 ![User Interface](images/uiScreenshot.jpeg)
-* Image #1 of the finished code
-* Image #2 of the finished code
+![COVID Code](images/snippet1.jpeg)
+![SkyScanner Code](images/snippet2.jpeg)
